@@ -57,4 +57,21 @@ const postSignup = async (req, res) => {
 }
 
 
-export { postSignup }
+
+const postLogin = async(req,res)=>{
+     try {
+        
+        let {email,password} = req.body;
+        if(!email || !password){
+            return responder(res,406,null,"email & password is required",false);
+
+        }
+
+     } catch (error) {
+        
+     }
+}
+
+
+
+export { postSignup ,postLogin }
