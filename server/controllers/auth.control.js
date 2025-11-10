@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import User from "../models/user.model.js";
 import responder from "../utils/responder.js"
+import jwt from "jsonwebtoken";
+
 
 
 /*
@@ -56,22 +58,52 @@ const postSignup = async (req, res) => {
     }
 }
 
+/*
+ email or password lekar aaeye  if no email & pass give the error
+ find the account of particular email
+ if !account say to signup
+ check the password..
+ if !password math give the error
+
+ JWT token create create kro 
 
 
-const postLogin = async(req,res)=>{
-     try {
-        
-        let {email,password} = req.body;
-        if(!email || !password){
-            return responder(res,406,null,"email & password is required",false);
+*/
 
+const postLogin = async (req, res) => {
+    try {
+
+        let { email, password } = req.body;
+        if (!email || !password) {
+            return responder(res, 406, null, "email & password is required", false);
         }
 
-     } catch (error) {
-        
-     }
+        let findedUser = await User.findOne({ email: email });
+        if (!findedUser) {
+            return responder(res, 404, null, "account not found ", false);
+        }
+
+        let isPassMatch = await bcrypt.compare(password, findedUser.password);
+
+        if (!isPassMatch) {
+            return responder(res, 404, null, "invalid credentials", false);
+        }
+
+        let token = jwt.sign({
+            id: findedUser._id,
+            name: findedUser.name,
+            email: findedUser.email
+        }, process.env.JWT_SECRET);
+
+        req.session.token = token;  // store token in Our session...
+
+        return responder(res, 200, null, "login successfully", true);
+
+    } catch (error) {
+        return responder(res, error.status || 500, null, error.message, false);
+    }
 }
 
 
 
-export { postSignup ,postLogin }
+export { postSignup, postLogin }

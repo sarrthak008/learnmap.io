@@ -38,14 +38,21 @@ import responder from "./utils/responder.js";
 
 
 // controllers
-import { postSignup } from "./controllers/auth.control.js";
+import { postLogin, postSignup } from "./controllers/auth.control.js";
+import verifyToken from "./middleware/verifyJWT.js";
 
 
 
-app.post("/signup", postSignup)
+app.post("/signup", postSignup);
+app.post("/login",postLogin);
 
+app.get("/dashboard",verifyToken,(req,res)=>{
+    console.log(req.user.id)
+    return responder(res, 200, null, "dashboard", true);
+})
 
 app.get("/health", (req, res) => {
+    console.log(req.session)
     return responder(res, 200, null, "health check", true);
 })
 
