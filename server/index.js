@@ -39,17 +39,14 @@ import responder from "./utils/responder.js";
 
 // controllers
 import { postLogin, postSignup } from "./controllers/auth.control.js";
-import verifyToken from "./middleware/verifyJWT.js";
+import { ganarateRoadmap } from "./controllers/roadmapControl.js";
 
 
 
 app.post("/signup", postSignup);
 app.post("/login",postLogin);
+app.post("/ganarate",ganarateRoadmap);
 
-app.get("/dashboard",verifyToken,(req,res)=>{
-    console.log(req.user.id)
-    return responder(res, 200, null, "dashboard", true);
-})
 
 app.get("/health", (req, res) => {
     console.log(req.session)
