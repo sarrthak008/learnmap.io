@@ -1,4 +1,5 @@
 import askai from "../config/askai.js";
+import Roadmap from "../models/roadmap.model.js";
 import ganaratePrompt from "../utils/ganratePrompt.js";
 import responder from "../utils/responder.js";
 
@@ -13,8 +14,17 @@ const ganarateRoadmap = async (req, res) => {
         let question = ganaratePrompt(topic);
 
         let answer = await askai(question);
-        return responder(res,200,answer,"here is your roadmap",true);
+      
+        const createdRoadmap = await Roadmap.create({
+           name:topic,
+           roadmap:answer,
+           createdBy: req.user.id
+        })
 
+        const savedRoadmap = await createdRoadmap.save();
+
+        return responder(res,200,savedRoadmap.name,"roadmap created successfully",true);
+        
      } catch (error) {
         return responder(res,error.status || 500,null,error.message,false);
      }

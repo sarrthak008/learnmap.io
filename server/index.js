@@ -41,11 +41,13 @@ import responder from "./utils/responder.js";
 import { postLogin, postSignup } from "./controllers/auth.control.js";
 import { ganarateRoadmap } from "./controllers/roadmapControl.js";
 
+// middleware
+import verifyToken from "./middleware/verifyJWT.js";
 
 
 app.post("/signup", postSignup);
 app.post("/login",postLogin);
-app.post("/ganarate",ganarateRoadmap);
+app.post("/ganarate",verifyToken,ganarateRoadmap);
 
 
 app.get("/health", (req, res) => {
