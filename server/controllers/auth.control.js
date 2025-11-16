@@ -97,7 +97,9 @@ const postLogin = async (req, res) => {
 
         req.session.token = token;  // store token in Our session...
 
-        return responder(res, 200, null, "login successfully", true);
+        let data = {name:findedUser.name,email:findedUser.email,token:token}
+
+        return responder(res, 200,data, "login successfully", true);
 
     } catch (error) {
         return responder(res, error.status || 500, null, error.message, false);

@@ -3,10 +3,38 @@ import NavBar from '../components/NavBar'
 import BGIMG from "../assets/register.svg"
 import AppInput from '../components/AppInput'
 import AppButton from '../components/AppButton'
+import axios from 'axios'
+import { toast } from 'sonner'
+const APIURL = import.meta.env.VITE_BACKCNEND_URL
 
 const Register = () => {
 
   const [passType, setPassType] = useState("password");
+  // create a new account 
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handelLogin = async () => {
+    try {
+      let responce = await axios.post(`${APIURL}/login`, {
+        email, password
+      }, { withCredentials: true });
+
+      //user login successfully..
+      if(responce.data.success){
+         toast.success(responce.data.message)
+         localStorage.setItem("user",JSON.stringify(responce.data.data))
+        
+      }else{
+         toast.error(responce.data.message)
+      }
+
+    } catch (error) {
+      toast.error(error.response.data.message || "something went wrong")
+    }
+  }
+
 
   return (
     <div className='h-screen w-screen flex overflow-hidden'>
@@ -33,13 +61,13 @@ const Register = () => {
           <p className='text-gray-400 text-sm'>Dont have an account? <span className='text-blue-500'>create new account here.</span></p>
           <div className='mt-10 w-[100%] flex flex-col gap-10'>
 
-            <AppInput placeholder='enter your email' type="email" required={true} />
+            <AppInput placeholder='enter your email' type="email" required={true} onchange={(txt) => setEmail(txt)} />
             <div>
-              <AppInput placeholder='enter your password' type={passType} required={true} />
+              <AppInput placeholder='enter your password' type={passType} required={true}  onchange={(txt) => setPassword(txt)}/>
               <div className='flex items-center gap-2 text-xl text-gray-400 mt-5'><input type='checkbox' id='pass' className='h-[20px] w-[20px] cursor-pointer' onChange={() => setPassType(passType === "password" ? "text" : "password")} /><label htmlFor='pass' className='cursor-pointer'>{passType === "password" ? "show password" : "Hide password"}</label></div>
             </div>
             <div className='w-[80%]'>
-              <AppButton title='Login' />
+              <AppButton title='Login' onclick={() => handelLogin()} />
             </div>
           </div>
         </div>
