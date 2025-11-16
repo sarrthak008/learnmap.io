@@ -16,7 +16,10 @@ const userSchema = new Schema({
     },
     phone: {
         type: String
-    }
+    },
+
+
+
 }, { timestamps: true })
 
 const User = model("User", userSchema)

@@ -39,7 +39,7 @@ import responder from "./utils/responder.js";
 
 // controllers
 import { postLogin, postSignup } from "./controllers/auth.control.js";
-import { ganarateRoadmap } from "./controllers/roadmapControl.js";
+import { cloneRoadmap, ganarateRoadmap, getMyRoadmaps } from "./controllers/roadmapControl.js";
 
 // middleware
 import verifyToken from "./middleware/verifyJWT.js";
@@ -48,6 +48,9 @@ import verifyToken from "./middleware/verifyJWT.js";
 app.post("/signup", postSignup);
 app.post("/login",postLogin);
 app.post("/ganarate",verifyToken,ganarateRoadmap);
+app.get("/clone/:id",verifyToken,cloneRoadmap); // inprove it V1
+app.get("/getmyroadmaps",verifyToken,getMyRoadmaps);
+
 
 
 app.get("/health", (req, res) => {
