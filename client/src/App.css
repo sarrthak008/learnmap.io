@@ -9,5 +9,16 @@
 }
 
 body{
-  background-color: #202020;
+  background-color: #000000;
+}
+
+
+.linear-text{
+  background: linear-gradient(to right ,#ffffff,#c4c2c2, gray, blue);
+  background-clip: text;
+  color: transparent;
+}
+
+input{
+  accent-color: #007bff;
 }
