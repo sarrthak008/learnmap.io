@@ -7,7 +7,8 @@ const StoreProvider = ({ children }) => {
 
     const [isLogin, setIsLogin] = useState(false);
     const [user, setUser] = useState(null)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [scklatonCount, setScklatonCount] = useState([1,2,3,4]);
 
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const StoreProvider = ({ children }) => {
 
 
     return (
-        <Store.Provider value={{isLogin,setIsLogin,user,isModalOpen,setIsModalOpen}}>
+        <Store.Provider value={{isLogin,setIsLogin,user,isModalOpen,setIsModalOpen,scklatonCount,setScklatonCount}}>
             {children}
         </Store.Provider>
     )
