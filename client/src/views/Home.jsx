@@ -6,9 +6,11 @@ import NavBar from '../components/NavBar'
 import { HEADING, SUBHEADING } from '../config/Brand'
 import AppButton from '../components/AppButton'
 import HomeButton from '../components/HomeButton'
+import Modal from '../components/Modal'
 
 const Home = () => {
 
+  const {isModalOpen} = useStore();
 
 
   return (
@@ -26,6 +28,7 @@ const Home = () => {
                </div>
             </div>
         </div>
+        {isModalOpen ? <Modal/> :null}
     </div>
   )
 }

@@ -6,10 +6,17 @@ import AppButton from '../components/AppButton'
 import axios from 'axios'
 import { toast } from 'sonner'
 const APIURL = import.meta.env.VITE_BACKCNEND_URL
+import {  useNavigate } from 'react-router-dom'
+import { useStore } from '../context/Store'
 
-const Register = () => {
+const Login = () => {
 
+
+  const navigate = useNavigate();
   const [passType, setPassType] = useState("password");
+  const {setIsLogin} = useStore()
+
+
   // create a new account 
 
   const [email, setEmail] = useState('');
@@ -24,8 +31,9 @@ const Register = () => {
       //user login successfully..
       if(responce.data.success){
          toast.success(responce.data.message)
+         setIsLogin(true)
          localStorage.setItem("user",JSON.stringify(responce.data.data))
-        
+         navigate("/dashboard")
       }else{
          toast.error(responce.data.message)
       }
@@ -61,9 +69,9 @@ const Register = () => {
           <p className='text-gray-400 text-sm'>Dont have an account? <span className='text-blue-500'>create new account here.</span></p>
           <div className='mt-10 w-[100%] flex flex-col gap-10'>
 
-            <AppInput placeholder='enter your email' type="email" required={true} onchange={(txt) => setEmail(txt)} />
+            <AppInput placeholder='enter your email' value={email} type="email" required={true} onchange={(txt) => setEmail(txt)} />
             <div>
-              <AppInput placeholder='enter your password' type={passType} required={true}  onchange={(txt) => setPassword(txt)}/>
+              <AppInput placeholder='enter your password' value={password} type={passType} required={true}  onchange={(txt) => setPassword(txt)}/>
               <div className='flex items-center gap-2 text-xl text-gray-400 mt-5'><input type='checkbox' id='pass' className='h-[20px] w-[20px] cursor-pointer' onChange={() => setPassType(passType === "password" ? "text" : "password")} /><label htmlFor='pass' className='cursor-pointer'>{passType === "password" ? "show password" : "Hide password"}</label></div>
             </div>
             <div className='w-[80%]'>
@@ -76,4 +84,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login

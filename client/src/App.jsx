@@ -8,6 +8,7 @@ import NotFound from './views/NotFound'
 import Register from './views/Register'
 import Login from './views/Login'
 import NavBar from './components/NavBar'
+import Dashboard from './views/Dashboard'
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
-
+          <Route path="/dashboard" element={<Dashboard/>} />
  
           <Route path='*' element={<NotFound/>}/>
         </Routes>

@@ -3,10 +3,60 @@ import NavBar from '../components/NavBar'
 import BGIMG from "../assets/register.svg"
 import AppInput from '../components/AppInput'
 import AppButton from '../components/AppButton'
+import { toast } from 'sonner'
+import axios from 'axios'
+const APIURL = import.meta.env.VITE_BACKCNEND_URL
+import { useNavigate } from 'react-router-dom'
+
 
 const Register = () => {
-
+  
+  const navigate = useNavigate()
   const [passType, setPassType] = useState("password");
+
+  const [name,setName] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+const handelSignUp = async()=>{
+    try {
+       if(!name && !email && !password){
+          toast.error("all filds are required")
+          return
+       }
+       if(password.length <6){
+        toast.error("password must contains 6 characters")
+        return
+       }
+
+       if( ! email.includes("@") && !email.includes(".")){
+         toast.error("invalid email")
+         return
+       }
+
+       let response = await axios.post(`${APIURL}/signup`,{
+        name:name,
+        email:email,
+        password:password
+       },{withCredentials:true})
+
+       if(response.data.success){
+        toast.success(response.data.message)
+        setName('')
+        setEmail('')
+        setPassword('')
+
+        // login page ke upar ja paye 
+        navigate("/login")
+
+
+       }else{
+        toast.error(response.data.message)
+       }
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+  }
 
   return (
     <div className='h-screen w-screen flex overflow-hidden'>
@@ -37,14 +87,14 @@ const Register = () => {
           <h3 className='text-white text-4xl'>Register.</h3>
           <p className='text-gray-400 text-sm'>already have an account? <span className='text-blue-500'>Login here.</span></p>
           <div className='mt-10 w-[100%] flex flex-col gap-10'>
-            <AppInput placeholder='enter your name' type='text' required={true} />
-            <AppInput placeholder='enter your email' type="email" required={true} />
+            <AppInput placeholder='enter your name' type='text' required={true} value={name} onchange={(txt)=>setName(txt)} />
+            <AppInput placeholder='enter your email' type="email" required={true} value={email} onchange={(txt)=>setEmail(txt)}/>
             <div>
-              <AppInput placeholder='enter your password' type={passType} required={true} />
+              <AppInput placeholder='enter your password' type={passType} required={true} value={password}  onchange={(txt)=>setPassword(txt)}/>
               <div className='flex items-center gap-2 text-xl text-gray-400 mt-5'><input type='checkbox' id='pass' className='h-[20px] w-[20px] cursor-pointer' onChange={() => setPassType(passType === "password" ? "text" : "password")} /><label htmlFor='pass' className='cursor-pointer'>{passType === "password" ? "show password" : "Hide password"}</label></div>
             </div>
             <div className='w-[80%]'>
-              <AppButton title='Register' />
+              <AppButton title='Register' onclick={()=>handelSignUp()}/>
             </div>
           </div>
         </div>
