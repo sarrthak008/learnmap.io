@@ -23,6 +23,7 @@ app.use(cookieParser());
 
 // express-session middleware..
 app.use(session({
+    name:"token",
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
