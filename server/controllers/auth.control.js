@@ -96,7 +96,7 @@ const postLogin = async (req, res) => {
         }, process.env.JWT_SECRET);
 
         req.session.token = token;  // store token in Our session...
-
+         await req.session.save(); 
         let data = {name:findedUser.name,email:findedUser.email,token:token}
 
         return responder(res, 200,data, "login successfully", true);
