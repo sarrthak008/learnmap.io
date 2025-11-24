@@ -10,6 +10,7 @@ const app = express();
 const PORT = 3000 || process.env.PORT;
 
 // middlewares
+app.set('trust proxy', 1)
 
 app.use(cors({
     origin: ["http://localhost:5173","https://lernamap.vercel.app"],
@@ -27,7 +28,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         httpOnly: false,
-        maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days,
+        sameSite:"none"
     }
 }))
 
