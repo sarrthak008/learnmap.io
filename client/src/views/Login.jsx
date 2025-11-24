@@ -32,6 +32,7 @@ const Login = () => {
       if(responce.data.success){
          toast.success(responce.data.message)
          setIsLogin(true)
+         document.cookie = `token=${responce.data.token}`
          localStorage.setItem("user",JSON.stringify(responce.data.data))
          navigate("/dashboard")
       }else{
