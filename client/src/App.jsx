@@ -9,6 +9,7 @@ import Register from './views/Register'
 import Login from './views/Login'
 import NavBar from './components/NavBar'
 import Dashboard from './views/Dashboard'
+import ViewRoadMap from './views/ViewRoadMap'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="view/:id" element ={<ViewRoadMap/>}/>
  
           <Route path='*' element={<NotFound/>}/>
         </Routes>
