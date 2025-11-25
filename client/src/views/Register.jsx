@@ -61,7 +61,7 @@ const handelSignUp = async()=>{
   return (
     <div className='h-screen w-screen flex overflow-hidden'>
       <NavBar />
-      <div className='w-[50%] h-screen relative flex items-center justify-center flex-col'>
+      <div className='hidden w-[50%] h-screen relative md:flex items-center justify-center flex-col'>
          <div className='absolute z-10 w-[80%] mx-auto'>
           <div className=''>
              <h2 className='text-3xl text-white'><i className="ri-corner-up-right-fill"></i>. Enter Your Goal</h2>
@@ -82,8 +82,8 @@ const handelSignUp = async()=>{
         <img src={BGIMG} className='absolute brightness-30' />
       </div>
 
-      <div className='w-[50%] h-screen flex items-center justify-center'>
-        <div className='h-[80%] w-[70%] bg-gray-800/40 rounded-2xl p-4 backdrop-blur-md'>
+      <div className='w-screen md:w-[50%] h-screen flex items-center justify-center'>
+        <div className='h-[80%] w-[90%] md:w-[70%] bg-gray-800/40 rounded-2xl p-4 backdrop-blur-md'>
           <h3 className='text-white text-4xl'>Register.</h3>
           <p className='text-gray-400 text-sm'>already have an account? <span className='text-blue-500'>Login here.</span></p>
           <div className='mt-10 w-[100%] flex flex-col gap-10'>
