@@ -13,18 +13,18 @@ const Dashboard = () => {
   
 
   return (
-    <div className='h-screen w-screen overflow-hidden '>
+    <div className='h-screen w-screen overflow-x-hidden'>
        <NavBar/>
        <div className='h-20 w-screen mt-25 flex gap-10'>
          <span className='text-gray-400 text-xl ml-4 cursor-pointer' onClick={()=>setIsRoadmapGanaratorOpen(false)}>My RoadMaps</span>
          <span className='text-blue-500 text-xl cursor-pointer' onClick={()=>setIsRoadmapGanaratorOpen(true)}>Create new Road map</span>
        </div>
 
-         <div className='overflow-x-hidden overflow-y-scroll h-full w-full'>
+         <div className=''>
           {isRoadmapGanaratorOpen ?<RoadMapGanratorModal/> : <RoadMapsContainer/>}
          </div>  
        
-       
+
        {isModalOpen ? <Modal/> :null}
     </div>
   )

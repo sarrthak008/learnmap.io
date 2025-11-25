@@ -10,7 +10,7 @@ const RoadMapGanaratorUi = ()=>{
 
   const [input,setInput] = useState(null);
   const [buttonTitle,setButtonTitle] = useState('generate roadmap')
-  const {setIsRoadmapGanaratorOpen} = useStore();
+  const {setIsRoadmapGanaratorOpen,token} = useStore();
 
   const ganarateRoadmap = async ()=>{
      try {
@@ -21,13 +21,13 @@ const RoadMapGanaratorUi = ()=>{
        setButtonTitle('processing...')
        const result =  await axios.post(`${APIURL}/ganarate`,
         {
-          topic:input
+          topic:input,
+          localToken:token
         },{withCredentials:true})
 
       if(result.data.success){
         toast.success(result.data.message)
         setButtonTitle('roadmap generated')
-
         setTimeout(() => {
           setIsRoadmapGanaratorOpen(false)
         }, 1500);

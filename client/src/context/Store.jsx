@@ -8,15 +8,17 @@ const StoreProvider = ({ children }) => {
     const [isLogin, setIsLogin] = useState(false);
     const [user, setUser] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [scklatonCount, setScklatonCount] = useState([1,2,3,4]);
+    const [scklatonCount, setScklatonCount] = useState([1,2,3,4,2,3,4,6]);
     const [isRoadmapGanaratorOpen, setIsRoadmapGanaratorOpen] = useState(false);
-
+    const [token,setToken] = useState(null);
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("user")) || null
         if (data) {
             setUser(data)
             setIsLogin(true)
+            console.log(data)
+            setToken(data.token)
         } else {
             setIsLogin(false)
         }
@@ -24,7 +26,7 @@ const StoreProvider = ({ children }) => {
 
 
     return (
-        <Store.Provider value={{isRoadmapGanaratorOpen,setIsRoadmapGanaratorOpen,isLogin,setIsLogin,user,isModalOpen,setIsModalOpen,scklatonCount,setScklatonCount}}>
+        <Store.Provider value={{isRoadmapGanaratorOpen,setIsRoadmapGanaratorOpen,isLogin,setIsLogin,user,isModalOpen,setIsModalOpen,scklatonCount,setScklatonCount,token}}>
             {children}
         </Store.Provider>
     )

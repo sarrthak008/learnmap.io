@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 const Levels =({level}) =>{
@@ -32,6 +32,7 @@ const ViewRoadMap = () => {
 
     let { id } = useParams()
     const [roadMap, setRoadMap] = useState({});
+    const navigate = useNavigate()
 
 
     const loadRoadmaps = () => {
@@ -48,6 +49,7 @@ const ViewRoadMap = () => {
 
     return (
         <div className='h-screen w-screen overflow-x-hidden'>
+          <div className='m-10'><i className="ri-arrow-left-line text-white text-2xl cursor-pointer" onClick={()=>navigate("/dashboard")}></i></div>
             <div className='w-[80%] mx-auto'>
                 <h3 className='text-white text-3xl font-bold mt-14'> 📌 {roadMap?.title}</h3>
                  <div>

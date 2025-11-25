@@ -10,7 +10,7 @@ const NavBar = () => {
 
 
   return (
-    <div className='h-14 w-screen z-[999999] fixed top-0 bg-gray-300/20 text-white flex items-center justify-between'>
+    <div className='h-14 w-screen backdrop-blur-lg z-[999999] fixed top-0 bg-gray-300/20 text-white flex items-center justify-between'>
       <h3 className='text-2xl ml-4'>{BRAND_NAME}</h3>
       <div className='mr-6 flex gap-6 items-center justify-center'>
         <Link to='/'>Home</Link>
