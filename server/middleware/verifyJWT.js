@@ -17,7 +17,7 @@ const verifyToken = (req, res, next) => {
 
         let { token } = req.session;
         if (!token) {
-            // try to get token form body -- session hostiong problem 
+            // try to get token form body --session hostiong problem 
             let { localToken } = req.body;
         
             if (!localToken) {  //-- not localStorage token -- give the error
