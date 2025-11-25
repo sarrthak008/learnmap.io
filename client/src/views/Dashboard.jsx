@@ -16,11 +16,11 @@ const Dashboard = () => {
     <div className='h-screen w-screen overflow-x-hidden'>
        <NavBar/>
        <div className='h-20 w-screen mt-25 flex gap-10'>
-         <span className='text-gray-400 text-xl ml-4 cursor-pointer' onClick={()=>setIsRoadmapGanaratorOpen(false)}>My RoadMaps</span>
-         <span className='text-blue-500 text-xl cursor-pointer' onClick={()=>setIsRoadmapGanaratorOpen(true)}>Create new Road map</span>
+         <span className='text-gray-400 text-md md:text-xl ml-2 md:ml-4 cursor-pointer' onClick={()=>setIsRoadmapGanaratorOpen(false)}>My RoadMaps</span>
+         <span className='text-blue-500 text-md md:text-xl cursor-pointer ' onClick={()=>setIsRoadmapGanaratorOpen(true)}>Create new Road map</span>
        </div>
 
-         <div className=''>
+         <div className='w-full'>
           {isRoadmapGanaratorOpen ?<RoadMapGanratorModal/> : <RoadMapsContainer/>}
          </div>  
        

@@ -9,7 +9,7 @@ const Modal = () => {
 
   return (
     <div className='z-50 h-screen w-screen flex items-center justify-center fixed top-0 left-0 backdrop-blur-md'>
-         <div className='h-[300px] w-[20vw] bg-gray-700 rounded-2xl relative flex items-center justify-center flex-col'>
+         <div className='h-[300px] w-[80vw] md:w-[20vw] bg-gray-700 rounded-2xl relative flex items-center justify-center flex-col'>
             <i className="ri-close-line absolute top-2 right-2 cursor-pointer text-white text-2xl" onClick={()=>setIsModalOpen(false)}></i>
             <div className='h-[70px] w-[70px] rounded-full bg-gray-400 overflow-hidden'>
               <img src={USERIMG} className='h-full w-full object-cover'/>

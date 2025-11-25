@@ -43,7 +43,7 @@ const RoadMapGanaratorUi = ()=>{
 
 
   return(
-    <div className='flex flex-col'>
+    <div className='flex flex-col '>
       <span className='text-gray-300 text-md'>enter your goal here</span>
       <textarea  value={input} onChange={(e)=>setInput(e.target.value)}className='resize-none h-[30vh] outline-1 p-1 text-white text-md  rounded-sm  border-white outline-blue-700' placeholder='i want learn java '/>
      <div className='mt-4'>
@@ -57,8 +57,8 @@ const RoadMapGanaratorUi = ()=>{
 
 const RoadMapGanratorModal = () => {
   return (
-    <div className='h-[70%] w-[70%] mx-auto flex items-center justify-center'>
-       <div className='w-[50%] h-[] bg-gray-700 rounded-2xl p-3'>
+    <div className='h-[70%] w-screen md:w-[70%] mx-auto flex items-center justify-center'>
+       <div className='w-[90%] md:w-[50%] h-[] bg-gray-700 rounded-2xl p-3'>
              <RoadMapGanaratorUi/>
        </div>
     </div>
