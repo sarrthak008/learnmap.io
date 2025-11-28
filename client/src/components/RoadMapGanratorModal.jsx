@@ -30,7 +30,7 @@ const RoadMapGanaratorUi = ()=>{
         setButtonTitle('roadmap generated')
         setTimeout(() => {
           setIsRoadmapGanaratorOpen(false)
-        }, 1500);
+        }, 500);
 
       }else{
         toast.error(result.data.message)
