@@ -14,7 +14,7 @@ const Levels =({level}) =>{
                              <div>
                                  {
                                     data?.topics?.map((topic,index)=>(
-                                        <p className='text-gray-400 text-xl my-3 ml-5'>🔑  {topic}</p>
+                                        <p key={index} className='text-gray-400 text-xl my-3 ml-5'>🔑  {topic}</p>
                                     ))
                                  }
                              </div>
@@ -32,6 +32,7 @@ const ViewRoadMap = () => {
 
     let { id } = useParams()
     const [roadMap, setRoadMap] = useState({});
+    const [isreMoveable ,setIsRemoveable] = useState(false);
     const navigate = useNavigate()
 
 
@@ -39,7 +40,22 @@ const ViewRoadMap = () => {
         let allRoadMaps = JSON.parse(localStorage.getItem("roadmaps"));
         let findedRoadMap = allRoadMaps.find((roadmap) => roadmap._id == id);
         setRoadMap(JSON.parse(findedRoadMap.roadmap));
-        console.log(JSON.parse(findedRoadMap.roadmap));
+        if("isreMoveable" in  allRoadMaps[allRoadMaps.length - 1]){
+          setIsRemoveable(true);
+        }
+    }
+
+
+    const handelBack =()=>{
+         if(isreMoveable){
+            let roadmaps = JSON.parse(localStorage.getItem("roadmaps")) || [];
+            roadmaps.pop()
+            localStorage.setItem("roadmaps",JSON.stringify(roadmaps));
+            navigate("/explore");
+            setIsRemoveable(false)
+         }else{
+            navigate("/dashboard")
+         }
     }
 
     useEffect(() => {
@@ -49,7 +65,7 @@ const ViewRoadMap = () => {
 
     return (
         <div className='h-screen w-screen overflow-x-hidden'>
-          <div className='m-10'><i className="ri-arrow-left-line text-white text-2xl cursor-pointer" onClick={()=>navigate("/dashboard")}></i></div>
+          <div className='m-10'><i className="ri-arrow-left-line text-white text-2xl cursor-pointer" onClick={()=>handelBack()}></i></div>
             <div className='w-[80%] mx-auto'>
                 <h3 className='text-white text-3xl font-bold mt-14'> 📌 {roadMap?.title}</h3>
                  <div>
@@ -68,7 +84,7 @@ const ViewRoadMap = () => {
                     <span className='text-gray-300 text-2xl mt-5 block'> 🔍 resources</span>
                        <div>
                          {roadMap?.resources?.map((res,index)=>(
-                             <div >
+                             <div key={index}>
                                 <h3 className='text-gray-300 text-xl my-3 ml-10'> 🔖 {res?.name}</h3>
                                  <a  href={res?.url} target='_blank' rel='noreferrer'className='text-blue-500 ml-20 cursor-pointer'>{res?. url}</a>
                              </div>
