@@ -3,20 +3,29 @@ import axios from "axios"
 import NavBar from '../components/NavBar'
 import ExploreRoadmapCards from '../components/ExploreRoadmapCards'
 import { useStore } from '../context/Store'
+import { toast } from 'sonner'
 const APIURL = import.meta.env.VITE_BACKCNEND_URL
 
 
 const Explore = () => {
 
     const [roadmaps,setRoadmaps] = useState([]);   
-    const {isLogin} = useStore()
+    const [usermail,setmail] = useState();
     
     
     const loadAllRoadMaps = async () =>{
+    
         try {
             let response = await axios.get(`${APIURL}/getroadmaps`)
-            setRoadmaps(response.data.data.reverse());
+            const data = JSON.parse(localStorage.getItem("user")) || {}
+            if(response){
+                toast.success("roadmaps loads successfully")
+                 // show only other peoples roadmpas 
+                let newRoadmps = response?.data?.data.filter((r)=>r.createdBy.email != data?.email);
+                setRoadmaps(newRoadmps)
+            }
         } catch (error) {
+            toast.error("something went wrong");
             console.error(error.response)
         }
     }

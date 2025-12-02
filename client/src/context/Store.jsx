@@ -17,7 +17,7 @@ const StoreProvider = ({ children }) => {
         if (data) {
             setUser(data)
             setIsLogin(true)
-            console.log(data)
+            // console.log(data)
             setToken(data.token)
         } else {
             setIsLogin(false)
