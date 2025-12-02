@@ -9,9 +9,13 @@
 }
 
 body{
+  height: 100%;
   background-color: #000000;
 }
 
+body::-webkit-scrollbar{
+  display: none;
+}
 
 .linear-text{
   background: linear-gradient(to right ,#ffffff,#c4c2c2, gray, blue);

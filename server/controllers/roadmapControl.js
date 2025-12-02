@@ -94,7 +94,7 @@ const getMyRoadmaps = async(req,res)=>{
 
 const getRoadMpas = async (req,res) => {
     try {
-      let roadmap = await Roadmap.find().select("roadmap name id ").populate("createdBy","name email _id");
+      let roadmap = await Roadmap.find().select("roadmap name id status").populate("createdBy","name email _id");
       return responder(res,201,roadmap,"loadmaps load successfully",true);
     } catch (error) {
       return responder(res,501,null,error.message || "something went wrong",false)

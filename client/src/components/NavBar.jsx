@@ -22,7 +22,7 @@ const NavBar = () => {
           isLogin ?
             <>
               <Link to='/dashboard'>Dashboard</Link>
-              <Link to='/'>Explore</Link>
+              <Link to='/explore'>Explore</Link>
               <span className='cursor-pointer' onClick={()=>setIsModalOpen(true)}>More</span>
             </>
             :

@@ -10,6 +10,7 @@ import Login from './views/Login'
 import NavBar from './components/NavBar'
 import Dashboard from './views/Dashboard'
 import ViewRoadMap from './views/ViewRoadMap'
+import Explore from './views/Explore'
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
           <Route path='/login' element={<Login/>} />
           <Route path="/dashboard" element={<Dashboard/>} />
           <Route path="view/:id" element ={<ViewRoadMap/>}/>
- 
+          <Route path='/explore' element = {<Explore/>}/>
+          
           <Route path='*' element={<NotFound/>}/>
         </Routes>
       </StoreProvider>
