@@ -5,7 +5,7 @@ import AppButton from "./AppButton"
 
 const Modal = () => {
 
-    const {user , setIsModalOpen} = useStore()
+    const {user , setIsModalOpen ,logOut} = useStore()
 
   return (
     <div className='z-50 h-screen w-screen flex items-center justify-center fixed top-0 left-0 backdrop-blur-md'>
@@ -20,7 +20,7 @@ const Modal = () => {
             <div className='h-[2px] w-[90%] bg-white/50 mt-3 rounded-2xl'></div>
 
              <div className='h-[40px] w-[90%] mt-4'>
-               <AppButton title='Logout' icon={<i className="ri-logout-circle-r-fill"></i>}/>
+               <AppButton title='Logout' onclick={()=>logOut()} icon={<i className="ri-logout-circle-r-fill"></i>}/>
              </div>
              <span className='mt-4 text-red-400 cursor-pointer' onClick={()=>setIsModalOpen(false)}>close !</span>
          </div>

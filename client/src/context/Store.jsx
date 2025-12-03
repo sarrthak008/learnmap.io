@@ -12,6 +12,11 @@ const StoreProvider = ({ children }) => {
     const [isRoadmapGanaratorOpen, setIsRoadmapGanaratorOpen] = useState(false);
     const [token,setToken] = useState(null);
 
+    const logOut = () =>{
+         localStorage.clear();
+         window.location.reload()
+    }
+
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("user")) || null
         if (data) {
@@ -26,7 +31,7 @@ const StoreProvider = ({ children }) => {
 
 
     return (
-        <Store.Provider value={{isRoadmapGanaratorOpen,setIsRoadmapGanaratorOpen,isLogin,setIsLogin,user,isModalOpen,setIsModalOpen,scklatonCount,setScklatonCount,token}}>
+        <Store.Provider value={{isRoadmapGanaratorOpen,setIsRoadmapGanaratorOpen,isLogin,setIsLogin,user,isModalOpen,setIsModalOpen,scklatonCount,setScklatonCount,token,logOut}}>
             {children}
         </Store.Provider>
     )

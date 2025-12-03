@@ -25,7 +25,9 @@ const ExploreRoadmapCards = ({ data }) => {
 
      const cloneRoadMap = async(data) =>{
 
-        console.log(token)
+        if(!token){
+          return toast.error("login please! ")   
+        }
 
          try {
 
@@ -39,8 +41,10 @@ const ExploreRoadmapCards = ({ data }) => {
             }
 
          } catch (error) {
+            // console.log(error)
             toast.dismiss()
-            toast.error(error)
+            toast.error(error.response.data.message)
+            toast.error("login to clone roadmap")
          }
      }
 

@@ -11,6 +11,7 @@ import NavBar from './components/NavBar'
 import Dashboard from './views/Dashboard'
 import ViewRoadMap from './views/ViewRoadMap'
 import Explore from './views/Explore'
+import Protection from './context/Protection'
 
 const App = () => {
   return (
@@ -21,7 +22,11 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
-          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/dashboard" element={
+             <Protection>
+               <Dashboard/>
+             </Protection>
+          } />
           <Route path="view/:id" element ={<ViewRoadMap/>}/>
           <Route path='/explore' element = {<Explore/>}/>
           
